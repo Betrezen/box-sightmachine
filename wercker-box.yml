@@ -1,0 +1,117 @@
+name: sightmachine
+version: 0.0.6
+inherits : wercker/ubuntu12.04-webessentials@0.0.11
+type: main
+platform: ubuntu@12.04
+keywords:
+  - python
+  - nodejs
+  - simplecv
+script: |
+  sudo mkdir /var/local/pip
+
+  # download cache
+  sudo mkdir /var/local/pip/cache
+
+  # find-links/wheel dir
+  sudo mkdir /var/local/pip/packages
+
+  export PIP_CACHE=/var/local/pip/cache
+
+  sudo pip install wheel --download-cache $PIP_CACHE
+
+  mkdir $HOME/.pip
+  cp $WERCKER_SOURCE_DIR/pip.conf ~/.pip
+
+  echo "deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+  echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
+
+  sudo apt-get update
+  sudo apt-get install -y build-essential python-dev python-setuptools python-pip
+  sudo apt-get install -y supervisor swig libvpx-dev subversion
+  sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran
+  sudo apt-get install -y libgfortran3 liblapack3gf libumfpack5.4.0 libstdc++6
+  sudo apt-get install -y python-all-dev libsdl1.2-dev libsmpeg-dev wget
+  sudo apt-get install -y phantomjs git subversion libevent-dev python-gevent
+  sudo apt-get install -y python-opencv python-scipy python-numpy
+  sudo apt-get install -y python-pastescript ipython
+  sudo apt-get build-dep -y python-pygame
+  sudo apt-get install -y python-pygame
+  sudo apt-get install libwebp2
+  sudo apt-get install libwebp-dev
+
+  # install node
+  export NODEVERSION=0.10.16
+  cd $HOME
+  mkdir nodeinstall
+  cd nodeinstall
+  wget http://nodejs.org/dist/v$NODEVERSION/node-v$NODEVERSION.tar.gz
+  tar xzvf node-v$NODEVERSION.tar.gz
+  cd node-v$NODEVERSION
+  ./configure
+  make
+  sudo make install
+  cd $HOME
+  rm -fr nodeinstall
+  node -v
+
+  # install node dependencies
+  sudo npm install i -g brunch
+  sudo npm install i -g jasmine-node
+  sudo npm install i -g jasmine-jquery
+
+  # install mongo
+  mkdir -p /tmp/mongo
+  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.0.tgz -O /tmp/mongodb-linux-x86_64-2.2.0.tgz
+  sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.0.tgz -C /tmp/mongo
+  sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.0/bin/* /usr/local/bin/
+  sudo mkdir -p /var/lib/mongodb
+  sudo mkdir -p /var/log/mongodb
+  sudo cp $WERCKER_SOURCE_DIR/mongodb.conf /etc/
+
+  # add rabbitmq
+  echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
+  wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  sudo apt-key add rabbitmq-signing-key-public.asc
+  sudo apt-get update
+  sudo apt-get install -y rabbitmq-server
+
+  sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
+  sudo pip install -r $WERCKER_SOURCE_DIR/pip.requirements
+  sudo pip wheel pytz
+  sudo pip install pytz
+  sudo pip wheel pyyaml
+  sudo pip install pyyaml
+  sudo pip wheel svgwrite
+  sudo pip install svgwrite
+  sudo pip wheel pandas
+  sudo pip install pandas
+  sudo pip wheel patsy==0.1.0
+  sudo pip install patsy==0.1.0
+  sudo pip wheel gevent
+  sudo pip install gevent
+  sudo pip wheel path.py
+  sudo pip install path.py
+  sudo pip wheel python-dateutil
+  sudo pip install python-dateutil
+  sudo pip wheel svgwrite
+  sudo pip install svgwrite
+  sudo pip wheel pyyaml
+  sudo pip install pyyaml
+  sudo pip wheel mongoengine
+  sudo pip install mongoengine
+  sudo pip wheel PIL
+  sudo pip install PIL
+  sudo pip wheel jsonpickle
+  sudo pip install jsonpickle
+  sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
+  sudo pip install https://github.com/sightmachine/SimpleCV/zipball/develop
+  sudo pip wheel flask
+  sudo pip install flask
+  sudo pip wheel pytz
+  sudo pip install pytz
+  sudo pip wheel amqplib
+  sudo pip install amqplib
+  sudo pip wheel gevent-socketio==0.3.5-beta
+  sudo pip install gevent-socketio==0.3.5-beta
