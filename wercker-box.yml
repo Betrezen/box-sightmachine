@@ -63,9 +63,9 @@ script: |
 
   # install mongo
   mkdir -p /tmp/mongo
-  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.0.tgz -O /tmp/mongodb-linux-x86_64-2.2.0.tgz
-  sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.0.tgz -C /tmp/mongo
-  sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.0/bin/* /usr/local/bin/
+  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.6.tgz -O /tmp/mongodb-linux-x86_64-2.2.6.tgz
+  sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.6.tgz -C /tmp/mongo
+  sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.6/bin/* /usr/local/bin/
   sudo mkdir -p /var/lib/mongodb
   sudo mkdir -p /var/log/mongodb
   sudo cp $WERCKER_SOURCE_DIR/mongodb.conf /etc/
