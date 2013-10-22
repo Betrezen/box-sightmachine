@@ -30,7 +30,7 @@ script: |
   sudo apt-get update
   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
   sudo apt-get install -y supervisor swig libvpx-dev subversion
-  sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran
+  sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran libopenblas-dev liblapack-dev
   sudo apt-get install -y libgfortran3 liblapack3gf libumfpack5.4.0 libstdc++6
   sudo apt-get install -y python-all-dev libsdl1.2-dev libsmpeg-dev wget
   sudo apt-get install -y phantomjs git subversion libevent-dev python-gevent
