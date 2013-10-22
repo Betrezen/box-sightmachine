@@ -1,4 +1,5 @@
 numpy==1.7.1
+scipy==0.12
 PIL==1.1.7
 pygame==1.9.1release
 pyparsing==1.5.2
