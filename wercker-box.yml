@@ -34,7 +34,7 @@ script: |
   sudo apt-get install -y libgfortran3 liblapack3gf libumfpack5.4.0 libstdc++6
   sudo apt-get install -y python-all-dev libsdl1.2-dev libsmpeg-dev wget
   sudo apt-get install -y phantomjs git subversion libevent-dev python-gevent
-  sudo apt-get install -y python-opencv python-numpy
+  sudo apt-get install -y python-opencv python-numpy python-scipy
   sudo apt-get install -y python-pastescript ipython
   sudo apt-get build-dep -y python-pygame
   sudo apt-get install -y python-pygame
