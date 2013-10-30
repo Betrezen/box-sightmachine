@@ -36,7 +36,6 @@ blinker==1.3
 python-dateutil
 svgwrite
 pyyaml
-mongoengine
 pytz
 amqplib
 
