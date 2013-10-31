@@ -8,17 +8,17 @@ keywords:
   - nodejs
   - simplecv
 script: |
-  #sudo mkdir /var/local/pip
+  sudo mkdir /var/local/pip
 
   # download cache
-  #sudo mkdir /var/local/pip/cache
+  sudo mkdir /var/local/pip/cache
 
   # find-links/wheel dir
-  #sudo mkdir /var/local/pip/packages
+  sudo mkdir /var/local/pip/packages
 
-  #export PIP_CACHE=/var/local/pip/cache
+  export PIP_CACHE=/var/local/pip/cache
 
-  #sudo pip install wheel --download-cache $PIP_CACHE
+  sudo pip install wheel --download-cache $PIP_CACHE
 
   mkdir $HOME/.pip
   touch $HOME/.pip/pip.conf
