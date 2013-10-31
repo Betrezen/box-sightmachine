@@ -8,22 +8,22 @@ keywords:
   - nodejs
   - simplecv
 script: |
-  sudo mkdir /var/local/pip
+  #sudo mkdir /var/local/pip
 
   # download cache
-  sudo mkdir /var/local/pip/cache
+  #sudo mkdir /var/local/pip/cache
 
   # find-links/wheel dir
-  sudo mkdir /var/local/pip/packages
+  #sudo mkdir /var/local/pip/packages
 
-  export PIP_CACHE=/var/local/pip/cache
+  #export PIP_CACHE=/var/local/pip/cache
 
-  sudo pip install wheel --download-cache $PIP_CACHE
+  #sudo pip install wheel --download-cache $PIP_CACHE
 
   mkdir $HOME/.pip
-  cp $WERCKER_SOURCE_DIR/pip.conf ~/.pip
-  #echo "[global]" >> ~/.pip/pip.conf
-  #echo "index-url = http://mirror.sightmachine.com:8000/pypi" >> ~/.pip/pip.conf
+  touch $HOME/.pip/pip.conf
+  echo "[global]" >> $HOME/.pip/pip.conf
+  echo "index-url = http://mirror.sightmachine.com:8000/pypi" >> $HOME/.pip/pip.conf
 
   echo "deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
@@ -85,8 +85,8 @@ script: |
   #sudo tar zxvf matplotlib-1.3.1.tar.gz
   #sudo python matplotlib-1.3.1/setup.py install
   
-  sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
+  #sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
   sudo pip install https://github.com/sightmachine/SimpleCV/zipball/develop
 
-  sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
+  #sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
   sudo pip install -r $WERCKER_SOURCE_DIR/pip.requirements
