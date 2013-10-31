@@ -38,6 +38,7 @@ svgwrite
 pyyaml
 pytz
 amqplib
+mock
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
