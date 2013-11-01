@@ -20,6 +20,7 @@ script: |
 
   sudo pip install wheel --download-cache $PIP_CACHE
 
+  #Digital Ocean pip mirror
   mkdir $HOME/.pip
   touch $HOME/.pip/pip.conf
   echo "[global]" >> $HOME/.pip/pip.conf
