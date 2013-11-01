@@ -84,5 +84,5 @@ script: |
   sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
   sudo pip install https://github.com/sightmachine/SimpleCV/zipball/develop
 
-  sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
+  #sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
   sudo pip install -r $WERCKER_SOURCE_DIR/pip.requirements
