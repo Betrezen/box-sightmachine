@@ -1,5 +1,5 @@
 numpy==1.7.1
-scipy
+scipy==0.13.0
 PIL==1.1.7
 pyparsing==1.5.2
 watchdog==0.6.0
