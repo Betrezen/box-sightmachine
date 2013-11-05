@@ -46,7 +46,7 @@ script: |
   sudo apt-get install libwebp-dev
 
   # install node
-  export NODEVERSION=0.10.16
+  export NODEVERSION=0.10.20
   cd $HOME
   mkdir nodeinstall
   cd nodeinstall
