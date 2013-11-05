@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.8
+version: 0.0.9
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -46,40 +46,40 @@ script: |
   sudo apt-get install libwebp-dev
 
   # install node
-  #export NODEVERSION=0.10.16
-  #cd $HOME
-  #mkdir nodeinstall
-  #cd nodeinstall
-  #wget http://nodejs.org/dist/v$NODEVERSION/node-v$NODEVERSION.tar.gz
-  #tar xzvf node-v$NODEVERSION.tar.gz
-  #cd node-v$NODEVERSION
-  #./configure
-  #make
-  #sudo make install
-  #cd $HOME
-  #rm -fr nodeinstall
-  #node -v
+  export NODEVERSION=0.10.16
+  cd $HOME
+  mkdir nodeinstall
+  cd nodeinstall
+  wget http://nodejs.org/dist/v$NODEVERSION/node-v$NODEVERSION.tar.gz
+  tar xzvf node-v$NODEVERSION.tar.gz
+  cd node-v$NODEVERSION
+  ./configure
+  make
+  sudo make install
+  cd $HOME
+  rm -fr nodeinstall
+  node -v
 
   # install node dependencies
-  #sudo npm install i -g brunch
-  #sudo npm install i -g jasmine-node
-  #sudo npm install i -g jasmine-jquery
+  sudo npm install i -g brunch
+  sudo npm install i -g jasmine-node
+  sudo npm install i -g jasmine-jquery
 
   # install mongo
-  #mkdir -p /tmp/mongo
-  #wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.6.tgz -O /tmp/mongodb-linux-x86_64-2.2.6.tgz
-  #sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.6.tgz -C /tmp/mongo
-  #sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.6/bin/* /usr/local/bin/
-  #udo mkdir -p /var/lib/mongodb
-  #sudo mkdir -p /var/log/mongodb
-  #sudo cp $WERCKER_SOURCE_DIR/mongodb.conf /etc/
+  mkdir -p /tmp/mongo
+  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.6.tgz -O /tmp/mongodb-linux-x86_64-2.2.6.tgz
+  sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.6.tgz -C /tmp/mongo
+  sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.6/bin/* /usr/local/bin/
+  sudo mkdir -p /var/lib/mongodb
+  sudo mkdir -p /var/log/mongodb
+  sudo cp $WERCKER_SOURCE_DIR/mongodb.conf /etc/
 
   # add rabbitmq
-  #echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
-  #wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-  #sudo apt-key add rabbitmq-signing-key-public.asc
-  #sudo apt-get update
-  #sudo apt-get install -y rabbitmq-server
+  echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
+  wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  sudo apt-key add rabbitmq-signing-key-public.asc
+  sudo apt-get update
+  sudo apt-get install -y rabbitmq-server
   
   sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
   sudo pip install https://github.com/sightmachine/SimpleCV/zipball/develop
