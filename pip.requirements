@@ -39,6 +39,7 @@ pyyaml
 pytz==2013.7
 amqplib
 mock
+affinity==0.1.0
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
