@@ -10,6 +10,9 @@ keywords:
 script: |
   sudo mkdir /var/local/pip
 
+  # Add fingerprints for hosts
+  ./hosts.sh
+
   # download cache
   sudo mkdir /var/local/pip/cache
 
