@@ -40,6 +40,9 @@ pytz==2013.7
 amqplib
 mock
 affinity==0.1.0
+nose
+nose-cov
+yanc
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
