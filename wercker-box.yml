@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.12
+version: 0.0.13
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -11,7 +11,7 @@ script: |
   sudo mkdir /var/local/pip
 
   # Add fingerprints for hosts
-  ./hosts.sh
+  sudo ./hosts.sh
 
   # download cache
   sudo mkdir /var/local/pip/cache
