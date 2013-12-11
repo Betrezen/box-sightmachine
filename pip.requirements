@@ -43,6 +43,7 @@ affinity==0.1.0
 nose
 nose-cov
 yanc
+pytest
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
