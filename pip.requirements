@@ -41,6 +41,7 @@ mock==1.0.1
 affinity==0.1.0
 yanc==0.2.4
 pytest==2.4.2
+pytz==2013.7
 wercker==0.8.3
 
 #optional
