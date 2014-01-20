@@ -43,6 +43,7 @@ yanc==0.2.4
 pytest==2.4.2
 pytz==2013.7
 wercker==0.8.3
+libpymonit==0.2
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
