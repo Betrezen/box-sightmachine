@@ -1,11 +1,12 @@
 name: sightmachine
-version: 0.0.19
+version: 0.0.20
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
 keywords:
   - python
   - nodejs
+  - phantomjs
   - simplecv
   - openvpn
 script: |
@@ -37,13 +38,14 @@ script: |
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 
+  sudo add-apt-repository ppa:chris-lea/node.js
   sudo apt-get update
   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
   sudo apt-get install -y supervisor swig libvpx-dev subversion
   sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran libopenblas-dev liblapack-dev
   sudo apt-get install -y libgfortran3 liblapack3gf libumfpack5.4.0 libstdc++6
   sudo apt-get install -y python-all-dev libsdl1.2-dev libsmpeg-dev wget
-  sudo apt-get install -y phantomjs git subversion libevent-dev python-gevent
+  sudo apt-get install -y git subversion libevent-dev python-gevent
   sudo apt-get install -y python-opencv python-numpy python-scipy
   sudo apt-get install -y python-pastescript ipython
   sudo apt-get build-dep -y python-pygame
@@ -51,26 +53,13 @@ script: |
   sudo apt-get install libwebp2
   sudo apt-get install libwebp-dev
   sudo apt-get install openvpn
-
-  # install node
-  export NODEVERSION=0.10.20
-  cd $HOME
-  mkdir nodeinstall
-  cd nodeinstall
-  wget http://nodejs.org/dist/v$NODEVERSION/node-v$NODEVERSION.tar.gz
-  tar xzvf node-v$NODEVERSION.tar.gz
-  cd node-v$NODEVERSION
-  ./configure
-  make
-  sudo make install
-  cd $HOME
-  rm -fr nodeinstall
-  node -v
+  sudo apt-get install nodejs
 
   # install node dependencies
-  sudo npm install i -g brunch
-  sudo npm install i -g jasmine-node
-  sudo npm install i -g jasmine-jquery
+  sudo npm install brunch -g
+  sudo npm install jasmine-node -g
+  sudo npm install jasmine-jquery -g
+  sudo npm install yslow -g
 
   # install mongo
   mkdir -p /tmp/mongo
@@ -93,3 +82,5 @@ script: |
 
   #sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
   sudo pip install -r $WERCKER_SOURCE_DIR/pip.requirements
+steps:
+  - aussiegeek/install-phantomjs@0.0.3
