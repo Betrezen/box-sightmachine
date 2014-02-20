@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.21
+version: 0.0.22
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -54,6 +54,7 @@ script: |
   sudo apt-get install -y libwebp-dev
   sudo apt-get install -y openvpn
   sudo apt-get install -y nodejs
+  sudo apt-get install -y postgresql libpq-dev postgresql-server-dev-all
 
   # install node dependencies
   sudo npm install brunch@1.7.10 -g 
