@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.22
+version: 0.0.23
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -61,6 +61,8 @@ script: |
   sudo npm install jasmine-node -g
   sudo npm install jasmine-jquery -g
   sudo npm install yslow -g
+  sudo npm install casperjs -g
+  sudo npm install docco -g
 
   # install mongo
   mkdir -p /tmp/mongo
