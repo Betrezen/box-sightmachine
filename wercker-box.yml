@@ -18,7 +18,10 @@ script: |
   sudo bash hosts.sh
 
   # increase max open file limit
-  sudo ulimit -n 2048
+  #sudo ulimit -n 2048
+  
+  #temporarily install coverage here until devops puts it on mirror
+  sudo pip install coverage
 
   # download cache
   sudo mkdir /var/local/pip/cache
