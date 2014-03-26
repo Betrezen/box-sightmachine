@@ -47,6 +47,7 @@ libpymonit==0.2
 sqlalchemy==0.9.2
 psycopg2==2.5.2
 pygments==1.6
+sendgrid==0.1.4
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
