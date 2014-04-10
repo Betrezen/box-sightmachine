@@ -17,12 +17,6 @@ script: |
   echo $HOME
   sudo bash hosts.sh
 
-  # increase max open file limit
-  #sudo ulimit -n 2048
-  
-  #temporarily install coverage here until devops puts it on mirror
-  sudo pip install coverage
-
   # download cache
   sudo mkdir /var/local/pip/cache
 
@@ -38,7 +32,7 @@ script: |
   mkdir $HOME/.pip
   touch $HOME/.pip/pip.conf
   echo "[global]" >> $HOME/.pip/pip.conf
-  echo "index-url = http://mirror.sightmachine.com:8000/pypi" >> $HOME/.pip/pip.conf
+  echo "index-url = http://mirror.sightmachine.com:8000/pypi/" >> $HOME/.pip/pip.conf
 
   echo "deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
