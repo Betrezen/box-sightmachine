@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.30
+version: 0.0.40
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -27,20 +27,35 @@ script: |
 
   sudo pip install wheel --download-cache $PIP_CACHE
 
-  #Digital Ocean pip mirror
-
+  # Digital Ocean pip mirror
   mkdir $HOME/.pip
   touch $HOME/.pip/pip.conf
   echo "[global]" >> $HOME/.pip/pip.conf
   echo "index-url = http://mirror.sightmachine.com:8000/pypi/" >> $HOME/.pip/pip.conf
 
+  # add deb-src'es
   echo "deb-src http://archive.ubuntu.com/ubuntu precise main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 
+  # add mongo
+  echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | sudo tee -a /etc/apt/sources.list
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+  # add rabbitmq
+  echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
+  wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+  sudo apt-key add rabbitmq-signing-key-public.asc
+
+  # add nodejs
   sudo add-apt-repository -y ppa:chris-lea/node.js
+
+  # add ffmepg
   sudo add-apt-repository -y ppa:jon-severinsson/ffmpeg
-  sudo apt-get update -y
+
+  # update all the apt repos
+  sudo apt-get update
+
   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
   sudo apt-get install -y supervisor swig libvpx-dev subversion
   sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran libopenblas-dev liblapack-dev
@@ -48,7 +63,7 @@ script: |
   sudo apt-get install -y python-all-dev libsdl1.2-dev libsmpeg-dev wget
   sudo apt-get install -y git subversion libevent-dev python-gevent
   sudo apt-get install -y python-opencv python-numpy python-scipy
-  sudo apt-get install -y python-pastescript ipython
+  sudo apt-get install -y python-pastescript
   sudo apt-get build-dep -y python-pygame
   sudo apt-get install -y python-pygame
   sudo apt-get install -y libwebp2
@@ -56,7 +71,13 @@ script: |
   sudo apt-get install -y openvpn
   sudo apt-get install -y nodejs
   sudo apt-get install -y ffmpeg
+  sudo apt-get install -y monit daemon
   sudo apt-get install -y postgresql libpq-dev postgresql-server-dev-all
+  sudo apt-get install -y rabbitmq-server
+  sudo apt-get install -y mongodb-10gen=2.4.10
+
+  # pin mongo just in case something tries to update it
+  echo "mongodb-org hold" | sudo dpkg --set-selections
 
   # install node dependencies
   sudo npm install brunch@1.7.10 -g 
@@ -66,26 +87,11 @@ script: |
   sudo npm install casperjs -g
   sudo npm install docco -g
 
-  # install mongo
-  mkdir -p /tmp/mongo
-  wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.2.6.tgz -O /tmp/mongodb-linux-x86_64-2.2.6.tgz
-  sudo tar zxvf /tmp/mongodb-linux-x86_64-2.2.6.tgz -C /tmp/mongo
-  sudo cp /tmp/mongo/mongodb-linux-x86_64-2.2.6/bin/* /usr/local/bin/
-  sudo mkdir -p /var/lib/mongodb
-  sudo mkdir -p /var/log/mongodb
-  sudo cp $WERCKER_SOURCE_DIR/mongodb.conf /etc/
-
-  # add rabbitmq
-  echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
-  wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-  sudo apt-key add rabbitmq-signing-key-public.asc
-  sudo apt-get update
-  sudo apt-get install -y rabbitmq-server
-  
-  sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/develop
-  sudo pip install https://github.com/sightmachine/SimpleCV/zipball/develop
-
   #sudo pip wheel -r $WERCKER_SOURCE_DIR/pip.requirements
   sudo pip install -r $WERCKER_SOURCE_DIR/pip.requirements
+
+  sudo pip wheel https://github.com/sightmachine/SimpleCV/zipball/master
+  sudo pip install https://github.com/sightmachine/SimpleCV/zipball/master
+
 steps:
   - aussiegeek/install-phantomjs@0.0.3
