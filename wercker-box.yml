@@ -38,6 +38,10 @@ script: |
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 
+  # remove mongo
+  sudo apt-get purge mongodb mongodb-clients mongodb-server mongodb-dev
+  sudo apt-get autoremove
+  
   # add mongo
   echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | sudo tee -a /etc/apt/sources.list
   sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
