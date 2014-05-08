@@ -38,15 +38,20 @@ script: |
   echo "deb-src http://archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
   echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 
-  # remove mongo
-  sudo apt-get purge mongodb mongodb-clients mongodb-server mongodb-dev
+  # remove distro mongo
+  for i in `dpkg -l | grep ^mongo` ; do
+    sudo apt-get purge $i
+  done
+
+  # gank packages apt thinks we don't need before we try to install our own
+  # stuff
   sudo apt-get autoremove
-  
-  # add mongo
+
+  # add 10gen mongo
   echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | sudo tee -a /etc/apt/sources.list
   sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 
-  # add rabbitmq
+  # add rabbitmq from rabbit folks
   echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee -a /etc/apt/sources.list
   wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
   sudo apt-key add rabbitmq-signing-key-public.asc
@@ -60,6 +65,7 @@ script: |
   # update all the apt repos
   sudo apt-get update
 
+  # Install some stuff
   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
   sudo apt-get install -y supervisor swig libvpx-dev subversion
   sudo apt-get install -y libamd2.2.0 libblas3gf libc6 libgcc1 gfortran libopenblas-dev liblapack-dev
@@ -84,7 +90,7 @@ script: |
   echo "mongodb-org hold" | sudo dpkg --set-selections
 
   # install node dependencies
-  sudo npm install brunch@1.7.10 -g 
+  sudo npm install brunch@1.7.10 -g
   sudo npm install jasmine-node -g
   sudo npm install jasmine-jquery -g
   sudo npm install yslow -g
