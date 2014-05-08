@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.42
+version: 0.0.43
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -39,9 +39,7 @@ script: |
   echo "deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list
 
   # remove distro mongo
-  for i in `dpkg -l | grep ^mongo` ; do
-    sudo apt-get purge $i
-  done
+  for i in `dpkg -l | grep '^... mongo' | awk '{print $2}'` ; do sudo apt-get purge $i ; done
 
   # gank packages apt thinks we don't need before we try to install our own
   # stuff
