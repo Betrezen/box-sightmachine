@@ -105,3 +105,9 @@ script: |
 
 steps:
   - aussiegeek/install-phantomjs@0.0.3
+
+after-steps:
+    - hipchat-notify:
+        token: $HIPCHAT_TOKEN
+        room-id: 362330
+        from-name: wercker
