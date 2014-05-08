@@ -1,5 +1,5 @@
 name: sightmachine
-version: 0.0.43
+version: 0.0.44
 inherits : wercker/ubuntu12.04-webessentials@0.0.11
 type: main
 platform: ubuntu@12.04
@@ -103,3 +103,9 @@ script: |
 
 steps:
   - aussiegeek/install-phantomjs@0.0.3
+
+after-steps:
+    - hipchat-notify:
+        token: $HIPCHAT_TOKEN
+        room-id: 362330
+        from-name: wercker
