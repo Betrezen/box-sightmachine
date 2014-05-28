@@ -55,6 +55,7 @@ nose-cov==1.6
 coverage==3.7
 coveralls==0.4.1
 passlib==1.6.2
+validate_email==1.2
 
 #optional
 #https://github.com/ingenuitas/pyfirmata/zipball/master
