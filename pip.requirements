@@ -63,3 +63,4 @@ validate_email==1.2
 #https://github.com/ingenuitas/pyvpx/zipball/master
 boto==2.9.6
 psutil==0.7.1
+pdfkit=0.4.1
