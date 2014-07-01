@@ -64,3 +64,5 @@ validate_email==1.2
 boto==2.9.6
 psutil==0.7.1
 pdfkit==0.4.1
+pyfirmata==0.9.5
+voluptuous==0.8.5
