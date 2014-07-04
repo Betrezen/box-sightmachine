@@ -66,3 +66,4 @@ psutil==0.7.1
 pdfkit==0.4.1
 pyfirmata==0.9.5
 voluptuous==0.8.5
+pymodbus==1.2.0
